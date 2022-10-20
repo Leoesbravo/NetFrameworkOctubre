@@ -10,6 +10,7 @@ namespace PL
     {
         public static void Add()
         {
+            //Instancia de un objeto 
             ML.Alumno alumno = new ML.Alumno();
 
             Console.WriteLine("Inserte el nombre del alumno");
@@ -27,6 +28,7 @@ namespace PL
             Console.WriteLine("Inserte el sexo del alumno");
             alumno.Sexo = Console.ReadLine();
 
+            //mandar la información al BL 
             BL.Alumno.Add(alumno);
 
         }
