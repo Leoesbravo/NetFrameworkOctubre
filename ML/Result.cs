@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ML
 {
-    public class Result
+    public class Result //datos, excepciones, validar
     {
-        public bool Correct { get; set; }
-        public string ErrorMessage { get; set; }
+        public bool Correct { get; set; } //validando, manejar el flujo de mi codigo, me dices si salio bien o no mi metodo
+        public string ErrorMessage { get; set; } //almanecenar el mensaje de error
         public object Object { get; set; }
         public List<object> Objects { get; set; }
-        public Exception Ex { get; set; }
+        public Exception Ex { get; set; } //almacenar la excepción completa
     }
 }

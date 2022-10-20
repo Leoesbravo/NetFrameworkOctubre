@@ -28,8 +28,21 @@ namespace PL
             Console.WriteLine("Inserte el sexo del alumno");
             alumno.Sexo = Console.ReadLine();
 
+            
+            ML.Result result = new ML.Result();
             //mandar la información al BL 
-            BL.Alumno.Add(alumno);
+            result = BL.Alumno.Add(alumno);
+
+            if (result.Correct == true)
+            {
+                Console.WriteLine("El alumno se registro correctamente");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("El alumno no se registro" + result.ErrorMessage);
+                Console.ReadKey();
+            }
 
         }
     
