@@ -15,10 +15,10 @@ namespace PL
 
             Console.WriteLine("Inserte el nombre del alumno");
             alumno.Nombre = Console.ReadLine();
-            
+
             Console.WriteLine("Inserte el apellido paterno del alumno");
             alumno.ApellidoPaterno = Console.ReadLine();
-            
+
             Console.WriteLine("Inserte el apellido materno del alumno");
             alumno.ApellidoMaterno = Console.ReadLine();
 
@@ -28,7 +28,7 @@ namespace PL
             Console.WriteLine("Inserte el sexo del alumno");
             alumno.Sexo = Console.ReadLine();
 
-            
+
             ML.Result result = new ML.Result();
             //mandar la información al BL 
             result = BL.Alumno.Add(alumno);
@@ -76,7 +76,29 @@ namespace PL
         }
         public static void GetById()
         {
+            Console.WriteLine("Ingrese el id del alumno que desea consultar");
+            int idAlumno = int.Parse(Console.ReadLine());
 
+            ML.Result result = new ML.Result();
+            result = BL.Alumno.GetById(idAlumno);
+
+            if (result.Correct)
+            {
+                ML.Alumno alumno = new ML.Alumno();
+
+                //unboxing
+                alumno = (ML.Alumno)result.Object;
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("El id del alumno es: " + alumno.IdAlumno);
+                Console.WriteLine("El nombre del alumno es: " + alumno.Nombre);
+                Console.WriteLine("El apellido paterno del alumno es: " + alumno.ApellidoPaterno);
+                Console.WriteLine("-----------------------------------");
+            }
+            else
+            {
+                Console.WriteLine("Ocurrio un error " + result.ErrorMessage);
+            }
         }
 
     }

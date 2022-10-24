@@ -256,9 +256,69 @@ namespace BL
             }
             return result;
         }
-        //public static ML.Result GetById()
-        //{
+        public static ML.Result GetById(int idAlumno)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (SqlConnection context = new SqlConnection(DL.Conexion.GetConnectionString()))
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandText = "AlumnoGetById";
+                        cmd.Connection = context;
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-        //}
+                        SqlParameter[] collection = new SqlParameter[1];
+
+                        collection[0] = new SqlParameter("@IdAlumno", SqlDbType.Int);
+                        collection[0].Value = idAlumno;
+
+                        cmd.Parameters.AddRange(collection);
+
+                        //aqui voy a almacenar la información
+                        DataTable tableAlumno = new DataTable();
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+                        //adapter.SelectCommand = cmd;
+                        adapter.Fill(tableAlumno);
+
+                        if (tableAlumno.Rows.Count > 0)
+                        {
+
+                            //foreach (DataRow row in tableAlumno.Rows)
+                            //{
+
+                                            //DataRow row = new DataRow(tableAlumno.Rows);
+
+                            ML.Alumno alumno = new ML.Alumno();
+                            alumno.IdAlumno = int.Parse(row[0].ToString());
+                            alumno.Nombre = row[1].ToString();
+                            alumno.ApellidoPaterno = row[2].ToString();
+                            alumno.ApellidoMaterno = row[3].ToString();
+                            alumno.FechaNacimiento = row[4].ToString();
+                            alumno.Sexo = row[5].ToString();
+
+                            //boxing
+                            //Almacenar cualquier tipo de dato en un dato object
+                            result.Object = alumno;
+                            //}
+                            result.Correct = true;
+                        }
+                        else
+                        {
+                            result.Correct = false;
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
     }
 }
