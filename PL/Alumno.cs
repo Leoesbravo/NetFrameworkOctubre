@@ -45,6 +45,39 @@ namespace PL
             }
 
         }
-    
+        public static void Update()
+        {
+
+        }
+        public static void Delete()
+        {
+
+        }
+        public static void GetAll()
+        {
+            ML.Result result = BL.Alumno.GetAll();
+
+            if (result.Correct)
+            {
+                foreach (ML.Alumno alumno in result.Objects)
+                {
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine("El id del alumno es:" + alumno.IdAlumno);
+                    Console.WriteLine("El nombre del alumno es:" + alumno.Nombre);
+                    Console.WriteLine("El apellido paterno del alumno es:" + alumno.ApellidoPaterno);
+                    Console.WriteLine("-----------------------------------");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Ocurrio un error " + result.ErrorMessage);
+            }
+        }
+        public static void GetById()
+        {
+
+        }
+
     }
 }
