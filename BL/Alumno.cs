@@ -219,7 +219,7 @@ namespace BL
                         //aqui voy a almacenar la información
                         DataTable tableAlumno = new DataTable();
 
-                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
 
                         //adapter.SelectCommand = cmd;
                         adapter.Fill(tableAlumno);
