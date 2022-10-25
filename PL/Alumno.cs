@@ -28,10 +28,18 @@ namespace PL
             Console.WriteLine("Inserte el sexo del alumno");
             alumno.Sexo = Console.ReadLine();
 
+            //Console.WriteLine("Inserte el semestre del alumno");
+            //alumno.IdSemestre = int.Parse(Console.ReadLine());
+
+            alumno.Semestre = new ML.Semestre();
+            Console.WriteLine("Inserte el semestre del alumno");
+            alumno.Semestre.IdSemestre = int.Parse(Console.ReadLine());
+
+
 
             ML.Result result = new ML.Result();
             //mandar la información al BL 
-            result = BL.Alumno.Add(alumno);
+            result = BL.Alumno.AddSP(alumno);
 
             if (result.Correct == true)
             {
@@ -80,7 +88,7 @@ namespace PL
             int idAlumno = int.Parse(Console.ReadLine());
 
             ML.Result result = new ML.Result();
-            result = BL.Alumno.GetById(idAlumno);
+            //result = BL.Alumno.GetById(idAlumno);
 
             if (result.Correct)
             {

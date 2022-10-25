@@ -158,7 +158,7 @@ namespace BL
 
 
                         //agregar parametros 
-                        SqlParameter[] collection = new SqlParameter[5];
+                        SqlParameter[] collection = new SqlParameter[6];
 
                         collection[0] = new SqlParameter("@Nombre", SqlDbType.VarChar);
                         collection[0].Value = alumno.Nombre;
@@ -174,6 +174,9 @@ namespace BL
 
                         collection[4] = new SqlParameter("@Sexo", System.Data.SqlDbType.Char);
                         collection[4].Value = alumno.Sexo;
+
+                        collection[5] = new SqlParameter("@IdSemestre", System.Data.SqlDbType.Int);
+                        collection[5].Value = alumno.Semestre.IdSemestre;
 
                         //pasarle a mi command los parametros
                         cmd.Parameters.AddRange(collection);
@@ -219,9 +222,12 @@ namespace BL
                         //aqui voy a almacenar la información
                         DataTable tableAlumno = new DataTable();
 
+                        //me permite llenar un data table
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
 
                         //adapter.SelectCommand = cmd;
+
+                        //Llenar el datable tableAlumno
                         adapter.Fill(tableAlumno);
 
                         if (tableAlumno.Rows.Count > 0)
@@ -286,11 +292,7 @@ namespace BL
 
                         if (tableAlumno.Rows.Count > 0)
                         {
-
-                            //foreach (DataRow row in tableAlumno.Rows)
-                            //{
-
-                                            //DataRow row = new DataRow(tableAlumno.Rows);
+                            DataRow row = tableAlumno.Rows[0];
 
                             ML.Alumno alumno = new ML.Alumno();
                             alumno.IdAlumno = int.Parse(row[0].ToString());
