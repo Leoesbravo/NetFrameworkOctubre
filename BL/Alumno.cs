@@ -169,7 +169,7 @@ namespace BL
                         collection[2] = new SqlParameter("@ApellidoMaterno", System.Data.SqlDbType.VarChar);
                         collection[2].Value = alumno.ApellidoMaterno;
 
-                        collection[3] = new SqlParameter("@FechaNacimiento", System.Data.SqlDbType.Date);
+                        collection[3] = new SqlParameter("@FechaNacimiento", System.Data.SqlDbType.VarChar);
                         collection[3].Value = alumno.FechaNacimiento;
 
                         collection[4] = new SqlParameter("@Sexo", System.Data.SqlDbType.Char);
@@ -243,6 +243,9 @@ namespace BL
                                 alumno.ApellidoMaterno = row[3].ToString();
                                 alumno.FechaNacimiento = row[4].ToString();
                                 alumno.Sexo = row[5].ToString();
+
+                                alumno.Semestre = new ML.Semestre();
+                                alumno.Semestre.IdSemestre = int.Parse(row[6].ToString());
 
                                 result.Objects.Add(alumno);
                             }

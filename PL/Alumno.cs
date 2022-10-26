@@ -73,6 +73,7 @@ namespace PL
                     Console.WriteLine("El id del alumno es:" + alumno.IdAlumno);
                     Console.WriteLine("El nombre del alumno es:" + alumno.Nombre);
                     Console.WriteLine("El apellido paterno del alumno es:" + alumno.ApellidoPaterno);
+                    Console.WriteLine("El semestre del alumno es: " + alumno.Semestre.IdSemestre);
                     Console.WriteLine("-----------------------------------");
                 }
 
