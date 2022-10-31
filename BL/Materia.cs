@@ -145,5 +145,32 @@ namespace BL
         {
 
         }
+        public static ML.Result AddEF(ML.Materia materia)
+        {
+            ML.Result reuslt = new ML.Result();
+            try
+            {
+                using (DL_EF.LEscogidoProgramacionNCapasOctubreEntities context = new DL_EF.LEscogidoProgramacionNCapasOctubreEntities())
+                {
+                    var query = context.MateriaAdd(materia.Nombre, materia.Creditos, materia.Semestre.IdSemestre);
+
+                    if (query > 0)
+                    {
+                        reuslt.Correct = true;
+                    }
+                    else
+                    {
+                        reuslt.Correct = false;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return reuslt;
+        }
+
     }
 }

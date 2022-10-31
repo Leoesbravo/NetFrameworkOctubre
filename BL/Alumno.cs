@@ -325,5 +325,93 @@ namespace BL
             }
             return result;
         }
+        public static ML.Result AddLinq(ML.Alumno alumno)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.LEscogidoProgramacionNCapasOctubreEntities context = new DL_EF.LEscogidoProgramacionNCapasOctubreEntities())
+                {
+                    DL_EF.Alumno alumnoDL = new DL_EF.Alumno();
+
+                    alumnoDL.Nombre = alumno.Nombre;
+                    alumnoDL.ApellidoPaterno = alumno.ApellidoPaterno;
+                    alumnoDL.ApellidoMaterno = alumno.ApellidoMaterno;
+                    alumnoDL.Sexo = alumno.Sexo;
+                    alumnoDL.IdSemestre = alumno.Semestre.IdSemestre;
+
+                    context.Alumnoes.Add(alumnoDL);
+
+                    var query = context.SaveChanges();
+
+                    if(query > 0)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+        public static ML.Result GetByIdLINQ(int idAlumno)
+        {
+            ML.Result Result = new ML.Result();
+
+            try
+            {
+                using (DL_EF.LEscogidoProgramacionNCapasOctubreEntities Context = new DL_EF.LEscogidoProgramacionNCapasOctubreEntities())
+                {
+                    var ResultQuery = (from alumno in Context.Alumnoes
+                                       where alumno.IdAlumno == idAlumno
+                                       select new
+                                       {
+                                           alumno.IdAlumno,
+                                           alumno.Nombre,
+                                           alumno.IdSemestre,
+                                           alumno.Sexo,
+                                           alumno.FechaNacimiento,
+                                           alumno.ApellidoPaterno,
+                                           alumno.ApellidoMaterno
+                                       }).FirstOrDefault();
+
+                    if (ResultQuery != null)
+                    {
+
+                        ML.Alumno alumno = new ML.Alumno();
+                        alumno.IdAlumno = ResultQuery.IdAlumno;
+                        alumno.Nombre = ResultQuery.Nombre;
+                        alumno.FechaNacimiento = ResultQuery.FechaNacimiento.ToString();
+                        //DateTime.ParseExact(usuario.FechaNacimiento, "dd-MM-yyyy", null);
+                        alumno.ApellidoMaterno = ResultQuery.ApellidoMaterno;
+
+                        alumno.Semestre = new ML.Semestre();
+                        alumno.Semestre.IdSemestre = ResultQuery.IdSemestre.Value;
+
+                        Result.Object = alumno;
+                        Result.Correct = true;
+                    }
+                    else
+                    {
+                        Result.Correct = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Result.Correct = false;
+                Result.ErrorMessage = ex.Message;
+                Result.Ex = ex;
+            }
+            return Result;
+        }
     }
 }

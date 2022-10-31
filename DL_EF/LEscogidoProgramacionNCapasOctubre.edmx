@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LEscogidoProgramacionNCapasOctubreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="IdAlumno" />
+          </Key>
+          <Property Name="IdAlumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="20" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="20" />
+          <Property Name="FechaNacimiento" Type="date" />
+          <Property Name="Sexo" Type="char" MaxLength="1" />
+          <Property Name="IdSemestre" Type="int" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="IdMateria" />
+          </Key>
+          <Property Name="IdMateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Creditos" Type="tinyint" />
+          <Property Name="IdSemestre" Type="int" />
+        </EntityType>
+        <EntityType Name="Semestre">
+          <Key>
+            <PropertyRef Name="IdSemestre" />
+          </Key>
+          <Property Name="IdSemestre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK__Alumno__IdSemest__164452B1">
+          <End Role="Semestre" Type="Self.Semestre" Multiplicity="0..1" />
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semestre">
+              <PropertyRef Name="IdSemestre" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="IdSemestre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Materia__IdSemes__239E4DCF">
+          <End Role="Semestre" Type="Self.Semestre" Multiplicity="0..1" />
+          <End Role="Materia" Type="Self.Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semestre">
+              <PropertyRef Name="IdSemestre" />
+            </Principal>
+            <Dependent Role="Materia">
+              <PropertyRef Name="IdSemestre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AlumnoAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+          <Parameter Name="Sexo" Type="char" Mode="In" />
+          <Parameter Name="IdSemestre" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AlumnoGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="AlumnoGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAlumno" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MateriaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Creditos" Type="tinyint" Mode="In" />
+          <Parameter Name="IdSemestre" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MateriaUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMateria" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Creditos" Type="tinyint" Mode="In" />
+          <Parameter Name="IdSemestre" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="LEscogidoProgramacionNCapasOctubreModelStoreContainer">
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Semestre" EntityType="Self.Semestre" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Alumno__IdSemest__164452B1" Association="Self.FK__Alumno__IdSemest__164452B1">
+            <End Role="Semestre" EntitySet="Semestre" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Materia__IdSemes__239E4DCF" Association="Self.FK__Materia__IdSemes__239E4DCF">
+            <End Role="Semestre" EntitySet="Semestre" />
+            <End Role="Materia" EntitySet="Materia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LEscogidoProgramacionNCapasOctubreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="IdAlumno" />
+          </Key>
+          <Property Name="IdAlumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdSemestre" Type="Int32" />
+          <NavigationProperty Name="Semestre" Relationship="Self.FK__Alumno__IdSemest__164452B1" FromRole="Alumno" ToRole="Semestre" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="IdMateria" />
+          </Key>
+          <Property Name="IdMateria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Creditos" Type="Byte" />
+          <Property Name="IdSemestre" Type="Int32" />
+          <NavigationProperty Name="Semestre" Relationship="Self.FK__Materia__IdSemes__239E4DCF" FromRole="Materia" ToRole="Semestre" />
+        </EntityType>
+        <EntityType Name="Semestre">
+          <Key>
+            <PropertyRef Name="IdSemestre" />
+          </Key>
+          <Property Name="IdSemestre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alumnoes" Relationship="Self.FK__Alumno__IdSemest__164452B1" FromRole="Semestre" ToRole="Alumno" />
+          <NavigationProperty Name="Materias" Relationship="Self.FK__Materia__IdSemes__239E4DCF" FromRole="Semestre" ToRole="Materia" />
+        </EntityType>
+        <Association Name="FK__Alumno__IdSemest__164452B1">
+          <End Role="Semestre" Type="Self.Semestre" Multiplicity="0..1" />
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semestre">
+              <PropertyRef Name="IdSemestre" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="IdSemestre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Materia__IdSemes__239E4DCF">
+          <End Role="Semestre" Type="Self.Semestre" Multiplicity="0..1" />
+          <End Role="Materia" Type="Self.Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semestre">
+              <PropertyRef Name="IdSemestre" />
+            </Principal>
+            <Dependent Role="Materia">
+              <PropertyRef Name="IdSemestre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LEscogidoProgramacionNCapasOctubreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumnoes" EntityType="Self.Alumno" />
+          <EntitySet Name="Materias" EntityType="Self.Materia" />
+          <EntitySet Name="Semestres" EntityType="Self.Semestre" />
+          <AssociationSet Name="FK__Alumno__IdSemest__164452B1" Association="Self.FK__Alumno__IdSemest__164452B1">
+            <End Role="Semestre" EntitySet="Semestres" />
+            <End Role="Alumno" EntitySet="Alumnoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Materia__IdSemes__239E4DCF" Association="Self.FK__Materia__IdSemes__239E4DCF">
+            <End Role="Semestre" EntitySet="Semestres" />
+            <End Role="Materia" EntitySet="Materias" />
+          </AssociationSet>
+          <FunctionImport Name="AlumnoAdd">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+            <Parameter Name="IdSemestre" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoGetAll" ReturnType="Collection(LEscogidoProgramacionNCapasOctubreModel.AlumnoGetAll_Result)" />
+          <FunctionImport Name="AlumnoGetById" ReturnType="Collection(LEscogidoProgramacionNCapasOctubreModel.AlumnoGetById_Result)">
+            <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MateriaAdd">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Creditos" Mode="In" Type="Byte" />
+            <Parameter Name="IdSemestre" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MateriaUpdate">
+            <Parameter Name="IdMateria" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Creditos" Mode="In" Type="Byte" />
+            <Parameter Name="IdSemestre" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="AlumnoGetAll_Result">
+          <Property Type="Int32" Name="IdAlumno" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="IdSemestre" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AlumnoGetById_Result">
+          <Property Type="Int32" Name="IdAlumno" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="IdSemestre" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LEscogidoProgramacionNCapasOctubreModelStoreContainer" CdmEntityContainer="LEscogidoProgramacionNCapasOctubreEntities">
+          <EntitySetMapping Name="Alumnoes">
+            <EntityTypeMapping TypeName="LEscogidoProgramacionNCapasOctubreModel.Alumno">
+              <MappingFragment StoreEntitySet="Alumno">
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="IdSemestre" ColumnName="IdSemestre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materias">
+            <EntityTypeMapping TypeName="LEscogidoProgramacionNCapasOctubreModel.Materia">
+              <MappingFragment StoreEntitySet="Materia">
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Creditos" ColumnName="Creditos" />
+                <ScalarProperty Name="IdSemestre" ColumnName="IdSemestre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Semestres">
+            <EntityTypeMapping TypeName="LEscogidoProgramacionNCapasOctubreModel.Semestre">
+              <MappingFragment StoreEntitySet="Semestre">
+                <ScalarProperty Name="IdSemestre" ColumnName="IdSemestre" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoAdd" FunctionName="LEscogidoProgramacionNCapasOctubreModel.Store.AlumnoAdd" />
+          <FunctionImportMapping FunctionImportName="AlumnoGetAll" FunctionName="LEscogidoProgramacionNCapasOctubreModel.Store.AlumnoGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LEscogidoProgramacionNCapasOctubreModel.AlumnoGetAll_Result">
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="IdSemestre" ColumnName="IdSemestre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoGetById" FunctionName="LEscogidoProgramacionNCapasOctubreModel.Store.AlumnoGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LEscogidoProgramacionNCapasOctubreModel.AlumnoGetById_Result">
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="IdSemestre" ColumnName="IdSemestre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MateriaAdd" FunctionName="LEscogidoProgramacionNCapasOctubreModel.Store.MateriaAdd" />
+          <FunctionImportMapping FunctionImportName="MateriaUpdate" FunctionName="LEscogidoProgramacionNCapasOctubreModel.Store.MateriaUpdate" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

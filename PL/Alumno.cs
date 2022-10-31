@@ -39,7 +39,7 @@ namespace PL
 
             ML.Result result = new ML.Result();
             //mandar la información al BL 
-            result = BL.Alumno.AddSP(alumno);
+            result = BL.Alumno.AddLinq(alumno);
 
             if (result.Correct == true)
             {

@@ -27,7 +27,7 @@ namespace PL
 
             ML.Result result = new ML.Result();
             //mandar la información al BL 
-            result = BL.Materia.Add(materia);
+            result = BL.Materia.AddEF(materia);
 
             if (result.Correct == true)
             {
