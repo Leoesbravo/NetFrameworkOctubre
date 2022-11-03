@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LEscogidoProgramacionNCapasOctubreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LEscogidoProgramacionNCapasOctubreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Alumno">
           <Key>
             <PropertyRef Name="IdAlumno" />
@@ -80,6 +80,7 @@
           <Parameter Name="Creditos" Type="tinyint" Mode="In" />
           <Parameter Name="IdSemestre" Type="int" Mode="In" />
         </Function>
+        <Function Name="SemestreGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="LEscogidoProgramacionNCapasOctubreModelStoreContainer">
           <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
@@ -93,8 +94,7 @@
             <End Role="Materia" EntitySet="Materia" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LEscogidoProgramacionNCapasOctubreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -176,7 +176,7 @@
           </FunctionImport>
           <FunctionImport Name="AlumnoGetAll" ReturnType="Collection(LEscogidoProgramacionNCapasOctubreModel.AlumnoGetAll_Result)" />
           <FunctionImport Name="AlumnoGetById" ReturnType="Collection(LEscogidoProgramacionNCapasOctubreModel.AlumnoGetById_Result)">
-            <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+          <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MateriaAdd">
             <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -189,6 +189,7 @@
             <Parameter Name="Creditos" Mode="In" Type="Byte" />
             <Parameter Name="IdSemestre" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SemestreGetAll" ReturnType="Collection(LEscogidoProgramacionNCapasOctubreModel.SemestreGetAll_Result)" />
         </EntityContainer>
         <ComplexType Name="AlumnoGetAll_Result">
           <Property Type="Int32" Name="IdAlumno" Nullable="false" />
@@ -207,6 +208,10 @@
           <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
           <Property Type="String" Name="Sexo" Nullable="true" MaxLength="1" />
           <Property Type="Int32" Name="IdSemestre" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SemestreGetAll_Result">
+          <Property Type="Int32" Name="IdSemestre" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -274,6 +279,14 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="MateriaAdd" FunctionName="LEscogidoProgramacionNCapasOctubreModel.Store.MateriaAdd" />
           <FunctionImportMapping FunctionImportName="MateriaUpdate" FunctionName="LEscogidoProgramacionNCapasOctubreModel.Store.MateriaUpdate" />
+          <FunctionImportMapping FunctionImportName="SemestreGetAll" FunctionName="LEscogidoProgramacionNCapasOctubreModel.Store.SemestreGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LEscogidoProgramacionNCapasOctubreModel.SemestreGetAll_Result">
+                <ScalarProperty Name="IdSemestre" ColumnName="IdSemestre" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
