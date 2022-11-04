@@ -35,7 +35,7 @@
 
                             @Html.LabelFor(model => model.Nombre)
 
-                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control"})
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Ejemplo:Leonardo"})
 
                             @Html.ValidationMessageFor(model => model.Nombre)
 
@@ -48,7 +48,7 @@
 
                             @Html.LabelFor(model => model.ApellidoPaterno)
 
-                            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @type ="password" })
 
                             @Html.ValidationMessageFor(model => model.ApellidoPaterno)
 

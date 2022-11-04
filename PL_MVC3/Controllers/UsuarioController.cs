@@ -12,7 +12,7 @@ namespace PL_MVC3.Controllers
         public ActionResult GetAll()
         {
             ML.Result result = new ML.Result();
-            result = BL.Alumno.GetAll();
+            result = BL.Alumno.GetAllEF();
 
             if (result.Correct)
             {
@@ -32,39 +32,83 @@ namespace PL_MVC3.Controllers
             ML.Alumno alumno = new ML.Alumno();
             alumno.Semestre = new ML.Semestre();
 
-            ML.Result resultSemestre = new ML.Result();
-            resultSemestre = BL.Semestre.GetAll();
+            ML.Result resultSemestre = BL.Semestre.GetAll();
 
-            alumno.Semestre.Semestres = resultSemestre.Objects;
             if (idAlumno == null)
             {
-                //
-
+                alumno.Semestre.Semestres = resultSemestre.Objects;
                 return View(alumno);
             }
             else
             {
 
                 //GetbyId
-                ML.Result result = BL.Alumno.GetAll();
+                ML.Result result = BL.Alumno.GetById(idAlumno.Value);
 
                 if (result.Correct)
                 {
                     alumno = (ML.Alumno)result.Object;
+                    alumno.Semestre.Semestres = resultSemestre.Objects;
 
                 }
                 else
                 {
                     ViewBag.Message = "Ocurrio un error al consultar el alummno seleccionado";
                 }
+
+
                 return View(alumno);
             }
         }
 
-            [HttpPost]
-            public ActionResult Form(ML.Alumno alumno)
+        [HttpPost]
+        public ActionResult Form(ML.Alumno alumno)
+        {
+            ML.Result result = new ML.Result();
+            if(alumno.IdAlumno == 0)
             {
-                return View();
+                result = BL.Alumno.AddSP(alumno);
+                if (result.Correct)
+                {
+                    ViewBag.Mensaje = "Se ha registrado el alumno";
+                    return PartialView("Modal");
+                }
+                else
+                {
+                    ViewBag.Mensaje = "No ha registrado el alumno" + result.ErrorMessage;
+                    return PartialView("Modal");
+                }
+            }
+            else
+            {
+                //result = BL.Alumno.UpdateEF(alumno);
+                if (result.Correct)
+                {
+                    ViewBag.Mensaje = "Se ha registrado el alumno";
+                    return PartialView("Modal");
+                }
+                else
+                {
+                    ViewBag.Mensaje = "No ha registrado el alumno" + result.ErrorMessage;
+                    return PartialView("Modal");
+                }
+            }
+        }
+        [HttpGet]
+        public ActionResult Delete(int IdAlumno)
+        {
+            ML.Result result = new ML.Result();
+            //result = BL.Alumno.DeleteEF(IdAlumno);
+            if (result.Correct)
+            {
+                ViewBag.Mensaje = "Se ha elimnado el registro";
+                return PartialView("Modal");
+            }
+            else
+            {
+                ViewBag.Mensaje = "No see ha elimnado el registro" + result.ErrorMessage;
+                return PartialView("Modal");
             }
         }
     }
+}

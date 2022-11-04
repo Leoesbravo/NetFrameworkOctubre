@@ -26,7 +26,7 @@
 </div>
 
 <br />
-<table class="table  table-dark table-hover table-striped table-bordered table-responsive">
+<table class="table   table-hover table-bordered table-responsive">
     <thead>
         <tr class="table-secondary">
             <td>Editar</td>
@@ -50,7 +50,7 @@
                 <td>@alumno.ApellidoPaterno</td>
                 <td>@alumno.ApellidoMaterno</td>
                 <td>@alumno.Sexo</td>
-                <td>@alumno.Semestre.IdSemestre</td>
+                <td>@alumno.Semestre.Nombre</td>
                 <td>@alumno.FechaNacimiento</td>
               
                 <td style="text-align: center; vertical-align: middle;"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Usuario", new { IdAlumno= alumno.IdAlumno})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-eraser-fill" style="color: mintcream"></i></a></td>

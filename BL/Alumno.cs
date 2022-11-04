@@ -246,6 +246,7 @@ namespace BL
 
                                 alumno.Semestre = new ML.Semestre();
                                 alumno.Semestre.IdSemestre = int.Parse(row[6].ToString());
+                                alumno.Semestre.Nombre = row[7].ToString();
 
                                 result.Objects.Add(alumno);
                             }
@@ -304,6 +305,9 @@ namespace BL
                             alumno.ApellidoMaterno = row[3].ToString();
                             alumno.FechaNacimiento = row[4].ToString();
                             alumno.Sexo = row[5].ToString();
+
+                            alumno.Semestre = new ML.Semestre();
+                            alumno.Semestre.IdSemestre = int.Parse(row[6].ToString());
 
                             //boxing
                             //Almacenar cualquier tipo de dato en un dato object
@@ -412,6 +416,52 @@ namespace BL
                 Result.Ex = ex;
             }
             return Result;
+        }
+        public static ML.Result GetAllEF()
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.LEscogidoProgramacionNCapasOctubreEntities context = new DL_EF.LEscogidoProgramacionNCapasOctubreEntities())
+                {
+                    var usuarios = context.AlumnoGetAll().ToList();
+                    result.Objects = new List<object>();
+                    if (usuarios != null)
+                    {
+                        foreach (var objAlumno in usuarios)
+                        {
+
+                            ML.Alumno alumno = new ML.Alumno();
+                            alumno.IdAlumno = objAlumno.IdAlumno;
+                            alumno.Nombre = objAlumno.Nombre;
+                            alumno.ApellidoPaterno = objAlumno.ApellidoPaterno;
+                            alumno.ApellidoMaterno = objAlumno.ApellidoMaterno;
+                            alumno.FechaNacimiento = objAlumno.FechaNacimiento.Value.ToString("dd-MM-yyyy");
+                            alumno.Sexo = objAlumno.Sexo;
+
+                            alumno.Semestre = new ML.Semestre();
+                            alumno.Semestre.IdSemestre = objAlumno.IdSemestre.Value;
+                            alumno.Semestre.Nombre = objAlumno.Semestre;
+
+                            result.Objects.Add(alumno);
+
+                        }
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se ha podido realizar la consulta";
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
         }
     }
 }
