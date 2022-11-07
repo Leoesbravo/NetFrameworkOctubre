@@ -441,7 +441,7 @@ namespace BL
 
                             alumno.Semestre = new ML.Semestre();
                             alumno.Semestre.IdSemestre = objAlumno.IdSemestre.Value;
-                            alumno.Semestre.Nombre = objAlumno.Semestre;
+                            alumno.Semestre.Nombre = objAlumno.Semestre;                          
 
                             result.Objects.Add(alumno);
 

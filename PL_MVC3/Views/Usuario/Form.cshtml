@@ -35,7 +35,7 @@
 
                             @Html.LabelFor(model => model.Nombre)
 
-                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Ejemplo:Leonardo"})
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Ejemplo:Leonardo" })
 
                             @Html.ValidationMessageFor(model => model.Nombre)
 
@@ -48,7 +48,7 @@
 
                             @Html.LabelFor(model => model.ApellidoPaterno)
 
-                            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @type ="password" })
+                            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @type = "password" })
 
                             @Html.ValidationMessageFor(model => model.ApellidoPaterno)
 
@@ -104,8 +104,26 @@
                             @*@Html.TextBoxFor(model => model.Semestre.IdSemestre, new { @class = "form-control" })*@
 
                             @Html.DropDownListFor(model => model.Semestre.IdSemestre, new SelectList(Model.Semestre.Semestres, "IdSemestre", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
-                            
+
                             @Html.ValidationMessageFor(model => model.Semestre.IdSemestre)
+
+                        </div>
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.Horario.Grupo.Plantel.IdPlantel)
+
+                            @Html.DropDownListFor(model => model.Horario.Grupo.Plantel.IdPlantel, new SelectList(Model.Horario.Grupo.Plantel.Planteles, "IdPlantel", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Horario.Grupo.Plantel.IdPlantel)
+
+                        </div>
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.Horario.Grupo.IdGrupo)
+
+                            @Html.DropDownListFor(model => model.Horario.Grupo.IdGrupo, new SelectList(Model.Horario.Grupo.Grupos, "IdGrupo", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Horario.Grupo.IdGrupo)
 
                         </div>
 
@@ -134,4 +152,30 @@
 
     </div>
 </div>
+
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+
+$(document).ready(function () {
+        $("#ddlPais").change(function () {
+            $("#ddlEstado").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetEstado")',
+                dataType: 'json',
+                data: { IdPais: $("#ddlPais").val() },
+                success: function (estados) {
+                    $("#ddlEstado").append('<option value="0">'+ 'Seleccione una opción' + '</option>');
+                    $.each(estados, function (i, estados) {
+                        $("#ddlEstado").append('<option value="'
+                                                   + estados.IdEstado + '">'
+                                                   + estados.Nombre + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed.' + ex);
+                }
+            });
+        });
+</script>
 

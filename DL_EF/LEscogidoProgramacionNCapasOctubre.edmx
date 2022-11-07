@@ -17,6 +17,22 @@
           <Property Name="Sexo" Type="char" MaxLength="1" />
           <Property Name="IdSemestre" Type="int" />
         </EntityType>
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="IdGrupo" />
+          </Key>
+          <Property Name="IdGrupo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="IdPlantel" Type="int" />
+        </EntityType>
+        <EntityType Name="Horario">
+          <Key>
+            <PropertyRef Name="IdHorario" />
+          </Key>
+          <Property Name="IdHorario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="IdGrupo" Type="int" />
+        </EntityType>
         <EntityType Name="Materia">
           <Key>
             <PropertyRef Name="IdMateria" />
@@ -25,6 +41,13 @@
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Creditos" Type="tinyint" />
           <Property Name="IdSemestre" Type="int" />
+        </EntityType>
+        <EntityType Name="Plantel">
+          <Key>
+            <PropertyRef Name="IdPlantel" />
+          </Key>
+          <Property Name="IdPlantel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Semestre">
           <Key>
@@ -42,6 +65,30 @@
             </Principal>
             <Dependent Role="Alumno">
               <PropertyRef Name="IdSemestre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Grupo__IdPlantel__38996AB5">
+          <End Role="Plantel" Type="Self.Plantel" Multiplicity="0..1" />
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plantel">
+              <PropertyRef Name="IdPlantel" />
+            </Principal>
+            <Dependent Role="Grupo">
+              <PropertyRef Name="IdPlantel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Horario__IdGrupo__3B75D760">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="0..1" />
+          <End Role="Horario" Type="Self.Horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="Horario">
+              <PropertyRef Name="IdGrupo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -69,6 +116,9 @@
         <Function Name="AlumnoGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdAlumno" Type="int" Mode="In" />
         </Function>
+        <Function Name="GrupoGetByIdPlantel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdPlantel" Type="int" Mode="In" />
+        </Function>
         <Function Name="MateriaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Creditos" Type="tinyint" Mode="In" />
@@ -80,14 +130,26 @@
           <Parameter Name="Creditos" Type="tinyint" Mode="In" />
           <Parameter Name="IdSemestre" Type="int" Mode="In" />
         </Function>
+        <Function Name="PlantelGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SemestreGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="LEscogidoProgramacionNCapasOctubreModelStoreContainer">
           <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horario" EntityType="Self.Horario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plantel" EntityType="Self.Plantel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Semestre" EntityType="Self.Semestre" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Alumno__IdSemest__164452B1" Association="Self.FK__Alumno__IdSemest__164452B1">
             <End Role="Semestre" EntitySet="Semestre" />
             <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grupo__IdPlantel__38996AB5" Association="Self.FK__Grupo__IdPlantel__38996AB5">
+            <End Role="Plantel" EntitySet="Plantel" />
+            <End Role="Grupo" EntitySet="Grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Horario__IdGrupo__3B75D760" Association="Self.FK__Horario__IdGrupo__3B75D760">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Horario" EntitySet="Horario" />
           </AssociationSet>
           <AssociationSet Name="FK__Materia__IdSemes__239E4DCF" Association="Self.FK__Materia__IdSemes__239E4DCF">
             <End Role="Semestre" EntitySet="Semestre" />
@@ -190,6 +252,21 @@
           </FunctionImport>
           <FunctionImport Name="SemestreGetAll" ReturnType="Collection(LEscogidoProgramacionNCapasOctubreModel.SemestreGetAll_Result)" />
           <FunctionImport Name="AlumnoGetAll" ReturnType="Collection(LEscogidoProgramacionNCapasOctubreModel.AlumnoGetAll_Result)" />
+          <EntitySet Name="Grupoes" EntityType="LEscogidoProgramacionNCapasOctubreModel.Grupo" />
+          <EntitySet Name="Horarios" EntityType="LEscogidoProgramacionNCapasOctubreModel.Horario" />
+          <EntitySet Name="Plantels" EntityType="LEscogidoProgramacionNCapasOctubreModel.Plantel" />
+          <AssociationSet Name="FK__Grupo__IdPlantel__38996AB5" Association="LEscogidoProgramacionNCapasOctubreModel.FK__Grupo__IdPlantel__38996AB5">
+            <End Role="Plantel" EntitySet="Plantels" />
+            <End Role="Grupo" EntitySet="Grupoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Horario__IdGrupo__3B75D760" Association="LEscogidoProgramacionNCapasOctubreModel.FK__Horario__IdGrupo__3B75D760">
+            <End Role="Grupo" EntitySet="Grupoes" />
+            <End Role="Horario" EntitySet="Horarios" />
+          </AssociationSet>
+          <FunctionImport Name="PlantelGetAll" ReturnType="Collection(LEscogidoProgramacionNCapasOctubreModel.PlantelGetAll_Result)" />
+          <FunctionImport Name="GrupoGetByIdPlantel" ReturnType="Collection(LEscogidoProgramacionNCapasOctubreModel.GrupoGetByIdPlantel_Result)">
+            <Parameter Name="IdPlantel" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AlumnoGetById_Result">
           <Property Type="Int32" Name="IdAlumno" Nullable="false" />
@@ -213,6 +290,66 @@
           <Property Type="String" Name="Sexo" Nullable="true" MaxLength="1" />
           <Property Type="Int32" Name="IdSemestre" Nullable="true" />
           <Property Type="String" Name="Semestre" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="IdGrupo" />
+          </Key>
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdPlantel" Type="Int32" />
+          <NavigationProperty Name="Plantel" Relationship="LEscogidoProgramacionNCapasOctubreModel.FK__Grupo__IdPlantel__38996AB5" FromRole="Grupo" ToRole="Plantel" />
+          <NavigationProperty Name="Horarios" Relationship="LEscogidoProgramacionNCapasOctubreModel.FK__Horario__IdGrupo__3B75D760" FromRole="Grupo" ToRole="Horario" />
+        </EntityType>
+        <EntityType Name="Horario">
+          <Key>
+            <PropertyRef Name="IdHorario" />
+          </Key>
+          <Property Name="IdHorario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdGrupo" Type="Int32" />
+          <NavigationProperty Name="Grupo" Relationship="LEscogidoProgramacionNCapasOctubreModel.FK__Horario__IdGrupo__3B75D760" FromRole="Horario" ToRole="Grupo" />
+        </EntityType>
+        <EntityType Name="Plantel">
+          <Key>
+            <PropertyRef Name="IdPlantel" />
+          </Key>
+          <Property Name="IdPlantel" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Grupoes" Relationship="LEscogidoProgramacionNCapasOctubreModel.FK__Grupo__IdPlantel__38996AB5" FromRole="Plantel" ToRole="Grupo" />
+        </EntityType>
+        <Association Name="FK__Grupo__IdPlantel__38996AB5">
+          <End Type="LEscogidoProgramacionNCapasOctubreModel.Plantel" Role="Plantel" Multiplicity="0..1" />
+          <End Type="LEscogidoProgramacionNCapasOctubreModel.Grupo" Role="Grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plantel">
+              <PropertyRef Name="IdPlantel" />
+            </Principal>
+            <Dependent Role="Grupo">
+              <PropertyRef Name="IdPlantel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Horario__IdGrupo__3B75D760">
+          <End Type="LEscogidoProgramacionNCapasOctubreModel.Grupo" Role="Grupo" Multiplicity="0..1" />
+          <End Type="LEscogidoProgramacionNCapasOctubreModel.Horario" Role="Horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="Horario">
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="PlantelGetAll_Result">
+          <Property Type="Int32" Name="IdPlantel" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GrupoGetByIdPlantel_Result">
+          <Property Type="Int32" Name="IdGrupo" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdPlantel" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -286,6 +423,49 @@
                 <ScalarProperty Name="Sexo" ColumnName="Sexo" />
                 <ScalarProperty Name="IdSemestre" ColumnName="IdSemestre" />
                 <ScalarProperty Name="Semestre" ColumnName="Semestre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Grupoes">
+            <EntityTypeMapping TypeName="LEscogidoProgramacionNCapasOctubreModel.Grupo">
+              <MappingFragment StoreEntitySet="Grupo">
+                <ScalarProperty Name="IdPlantel" ColumnName="IdPlantel" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horarios">
+            <EntityTypeMapping TypeName="LEscogidoProgramacionNCapasOctubreModel.Horario">
+              <MappingFragment StoreEntitySet="Horario">
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plantels">
+            <EntityTypeMapping TypeName="LEscogidoProgramacionNCapasOctubreModel.Plantel">
+              <MappingFragment StoreEntitySet="Plantel">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPlantel" ColumnName="IdPlantel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PlantelGetAll" FunctionName="LEscogidoProgramacionNCapasOctubreModel.Store.PlantelGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LEscogidoProgramacionNCapasOctubreModel.PlantelGetAll_Result">
+                <ScalarProperty Name="IdPlantel" ColumnName="IdPlantel" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GrupoGetByIdPlantel" FunctionName="LEscogidoProgramacionNCapasOctubreModel.Store.GrupoGetByIdPlantel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LEscogidoProgramacionNCapasOctubreModel.GrupoGetByIdPlantel_Result">
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPlantel" ColumnName="IdPlantel" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -59,6 +59,15 @@
     <Compile Include="AlumnoGetById_Result.cs">
       <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
+    <Compile Include="Grupo.cs">
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GrupoGetByIdPlantel_Result.cs">
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Horario.cs">
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+    </Compile>
     <Compile Include="LEscogidoProgramacionNCapasOctubre.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,6 +84,12 @@
       <DependentUpon>LEscogidoProgramacionNCapasOctubre.edmx</DependentUpon>
     </Compile>
     <Compile Include="Materia.cs">
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Plantel.cs">
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlantelGetAll_Result.cs">
       <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

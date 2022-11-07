@@ -10,6 +10,11 @@
         <EntityTypeShape EntityType="LEscogidoProgramacionNCapasOctubreModel.Semestre" Width="1.5" PointX="5" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="LEscogidoProgramacionNCapasOctubreModel.FK__Alumno__IdSemest__164452B1" ManuallyRouted="false" />
         <AssociationConnector Association="LEscogidoProgramacionNCapasOctubreModel.FK__Materia__IdSemes__239E4DCF" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LEscogidoProgramacionNCapasOctubreModel.Grupo" Width="1.5" PointX="9.625" PointY="0.875" />
+        <EntityTypeShape EntityType="LEscogidoProgramacionNCapasOctubreModel.Horario" Width="1.5" PointX="11.875" PointY="1" />
+        <EntityTypeShape EntityType="LEscogidoProgramacionNCapasOctubreModel.Plantel" Width="1.5" PointX="7.375" PointY="1.125" />
+        <AssociationConnector Association="LEscogidoProgramacionNCapasOctubreModel.FK__Grupo__IdPlantel__38996AB5" />
+        <AssociationConnector Association="LEscogidoProgramacionNCapasOctubreModel.FK__Horario__IdGrupo__3B75D760" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -26,17 +26,22 @@ namespace PL_MVC3.Controllers
                 return View();
             }
         }
-        [HttpGet]
+        [HttpGet]//muestra las vistas
         public ActionResult Form(int? idAlumno)
         {
             ML.Alumno alumno = new ML.Alumno();
             alumno.Semestre = new ML.Semestre();
+            alumno.Horario = new ML.Horario();
+            alumno.Horario.Grupo = new ML.Grupo();
+            alumno.Horario.Grupo.Plantel = new ML.Plantel();
 
+            ML.Result resultPlanteles = BL.Plantel.GetAll();
             ML.Result resultSemestre = BL.Semestre.GetAll();
 
             if (idAlumno == null)
             {
                 alumno.Semestre.Semestres = resultSemestre.Objects;
+                alumno.Horario.Grupo.Plantel.Planteles = resultPlanteles.Objects;
                 return View(alumno);
             }
             else
