@@ -15,9 +15,11 @@ namespace DL_EF
     public partial class Horario
     {
         public int IdHorario { get; set; }
-        public string Nombre { get; set; }
+        public string Turno { get; set; }
         public Nullable<int> IdGrupo { get; set; }
+        public Nullable<int> IdAlumno { get; set; }
     
+        public virtual Alumno Alumno { get; set; }
         public virtual Grupo Grupo { get; set; }
     }
 }

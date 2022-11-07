@@ -112,18 +112,28 @@
 
                             @Html.LabelFor(model => model.Horario.Grupo.Plantel.IdPlantel)
 
-                            @Html.DropDownListFor(model => model.Horario.Grupo.Plantel.IdPlantel, new SelectList(Model.Horario.Grupo.Plantel.Planteles, "IdPlantel", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.Horario.Grupo.Plantel.IdPlantel, new SelectList(Model.Horario.Grupo.Plantel.Planteles, "IdPlantel", "Nombre"), "Selecciona una opción", new { id = "ddlPlantel", @class = "form-control" })
 
                             @Html.ValidationMessageFor(model => model.Horario.Grupo.Plantel.IdPlantel)
 
                         </div>
                         <div class="col-md-3">
 
-                            @Html.LabelFor(model => model.Horario.Grupo.IdGrupo)
+                            <div class="form-group">
+                                
 
-                            @Html.DropDownListFor(model => model.Horario.Grupo.IdGrupo, new SelectList(Model.Horario.Grupo.Grupos, "IdGrupo", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
+                                    @Html.LabelFor(model => model.Horario.Grupo)
+                                    @if (Model.Horario.Grupo.Grupos == null)
+                                    {
+                                        @Html.DropDownListFor(model => model.Horario.Grupo.IdGrupo, new SelectList(string.Empty, "Value", "Text"), "Seleciona un grupo", htmlAttributes: new { id = "ddlGrupo", @class = "form-control" })
+                                    }
 
-                            @Html.ValidationMessageFor(model => model.Horario.Grupo.IdGrupo)
+                                    else
+                                    {
+                                        @Html.DropDownListFor(model => model.Horario.Grupo.IdGrupo, new SelectList(Model.Horario.Grupo.Grupos, "IdGrupo", "Nombre"), "Seleciona un grupo", htmlAttributes: new { id = "ddlGrupo", @class = "form-control" })
+                                    }
+
+                            </div>
 
                         </div>
 
@@ -156,26 +166,29 @@
 @Scripts.Render("~/bundles/jquery")
 <script type="text/javascript">
 
-$(document).ready(function () {
-        $("#ddlPais").change(function () {
-            $("#ddlEstado").empty();
+    $(document).ready(function () {
+        $("#ddlPlantel").change(function () {
+            $("#ddlGrupo").empty();
             $.ajax({
                 type: 'POST',
-                url: '@Url.Action("GetEstado")',
+                url: '@Url.Action("GetGrupo")',
                 dataType: 'json',
-                data: { IdPais: $("#ddlPais").val() },
-                success: function (estados) {
-                    $("#ddlEstado").append('<option value="0">'+ 'Seleccione una opción' + '</option>');
-                    $.each(estados, function (i, estados) {
-                        $("#ddlEstado").append('<option value="'
-                                                   + estados.IdEstado + '">'
-                                                   + estados.Nombre + '</option>');
+                data: { IdPlantel: $("#ddlPlantel").val() },
+                success: function (grupos) {
+                    $("#ddlGrupo").append('<option value="0">' + 'Seleccione una opción' + '</option>');
+                    $.each(grupos, function (i, grupos) {
+                        $("#ddlGrupo").append('<option value="'
+                            + grupos.IdGrupo + '">'
+                            + grupos.Nombre + '</option>');
                     });
                 },
                 error: function (ex) {
                     alert('Failed.' + ex);
                 }
             });
-        });
+        })
+    })
+    
+    
 </script>
 

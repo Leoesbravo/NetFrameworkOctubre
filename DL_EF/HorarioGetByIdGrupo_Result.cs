@@ -11,9 +11,11 @@ namespace DL_EF
 {
     using System;
     
-    public partial class SemestreGetAll_Result
+    public partial class HorarioGetByIdGrupo_Result
     {
-        public byte IdSemestre { get; set; }
-        public string Nombre { get; set; }
+        public int IdHorario { get; set; }
+        public string Turno { get; set; }
+        public Nullable<int> IdGrupo { get; set; }
+        public Nullable<int> IdAlumno { get; set; }
     }
 }

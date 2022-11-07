@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -114,6 +115,20 @@ namespace PL_MVC3.Controllers
                 ViewBag.Mensaje = "No see ha elimnado el registro" + result.ErrorMessage;
                 return PartialView("Modal");
             }
+        }
+
+        public JsonResult GetGrupo(int IdPlantel)
+        {
+            var result = BL.Grupo.GetByIdPlantel(IdPlantel);
+
+            return Json(result.Objects, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetHorario(int IdPlantel)
+        {
+            var result = BL.Grupo.GetByIdPlantel(IdPlantel);
+
+            return Json(result.Objects, JsonRequestBehavior.AllowGet);
         }
     }
 }

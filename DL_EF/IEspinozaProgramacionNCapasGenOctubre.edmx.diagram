@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="49efa4d96c57445a9c0f1c297c3a724c" Name="Diagram1">
+        <EntityTypeShape EntityType="IEspinozaProgramacionNCapasGenOctubreModel.Alumno" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="IEspinozaProgramacionNCapasGenOctubreModel.Grupo" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IEspinozaProgramacionNCapasGenOctubreModel.Horario" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IEspinozaProgramacionNCapasGenOctubreModel.Plantel" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IEspinozaProgramacionNCapasGenOctubreModel.Semestre" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="IEspinozaProgramacionNCapasGenOctubreModel.FK__Horario__IdAlumn__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="IEspinozaProgramacionNCapasGenOctubreModel.FK_AlumnoSemestre" ManuallyRouted="false" />
+        <AssociationConnector Association="IEspinozaProgramacionNCapasGenOctubreModel.FK__Grupo__IdPlantel__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="IEspinozaProgramacionNCapasGenOctubreModel.FK__Horario__IdGrupo__2F10007B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

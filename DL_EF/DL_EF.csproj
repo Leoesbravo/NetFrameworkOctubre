@@ -51,22 +51,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alumno.cs">
-      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="AlumnoGetAll_Result.cs">
-      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="AlumnoGetById_Result.cs">
-      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="Grupo.cs">
-      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="GrupoGetByIdPlantel_Result.cs">
-      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="Horario.cs">
-      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HorarioGetByIdGrupo_Result.cs">
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEspinozaProgramacionNCapasGenOctubre.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEspinozaProgramacionNCapasGenOctubre.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEspinozaProgramacionNCapasGenOctubre.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.edmx</DependentUpon>
     </Compile>
     <Compile Include="LEscogidoProgramacionNCapasOctubre.Context.cs">
       <AutoGen>True</AutoGen>
@@ -87,17 +105,17 @@
       <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="Plantel.cs">
-      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="PlantelGetAll_Result.cs">
-      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Semestre.cs">
-      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="SemestreGetAll_Result.cs">
-      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -108,12 +126,29 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <EntityDeploy Include="IEspinozaProgramacionNCapasGenOctubre.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>IEspinozaProgramacionNCapasGenOctubre.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="IEspinozaProgramacionNCapasGenOctubre.edmx.diagram">
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.edmx</DependentUpon>
+    </None>
     <None Include="LEscogidoProgramacionNCapasOctubre.edmx.diagram">
       <DependentUpon>LEscogidoProgramacionNCapasOctubre.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="IEspinozaProgramacionNCapasGenOctubre.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.edmx</DependentUpon>
+      <LastGenOutput>IEspinozaProgramacionNCapasGenOctubre.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="IEspinozaProgramacionNCapasGenOctubre.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.edmx</DependentUpon>
+      <LastGenOutput>IEspinozaProgramacionNCapasGenOctubre.cs</LastGenOutput>
+    </Content>
     <Content Include="LEscogidoProgramacionNCapasOctubre.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LEscogidoProgramacionNCapasOctubre.Context.cs</LastGenOutput>
