@@ -18,7 +18,13 @@ namespace DL_EF
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
-        public string Genero { get; set; }
-        public Nullable<byte> IdSemestre { get; set; }
+        public string Sexo { get; set; }
+        public Nullable<int> IdSemestre { get; set; }
+        public int IdHorario { get; set; }
+        public string HorarioNombre { get; set; }
+        public int IdGrupo { get; set; }
+        public string NombreGrupo { get; set; }
+        public int IdPlantel { get; set; }
+        public string NombrePlantel { get; set; }
     }
 }

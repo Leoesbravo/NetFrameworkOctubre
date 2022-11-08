@@ -13,7 +13,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL_EF.IEspinozaProgramacionNCapasGenOctubreEntities1 context = new DL_EF.IEspinozaProgramacionNCapasGenOctubreEntities1())
+                using (DL_EF.LEscogidoProgramacionNCapasOctubreEntities context = new DL_EF.LEscogidoProgramacionNCapasOctubreEntities())
                 {
                     var usuarios = context.SemestreGetAll().ToList();
                     result.Objects = new List<object>();

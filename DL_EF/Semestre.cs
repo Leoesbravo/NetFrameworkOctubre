@@ -18,12 +18,15 @@ namespace DL_EF
         public Semestre()
         {
             this.Alumnoes = new HashSet<Alumno>();
+            this.Materias = new HashSet<Materia>();
         }
     
-        public byte IdSemestre { get; set; }
+        public int IdSemestre { get; set; }
         public string Nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Alumno> Alumnoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Materia> Materias { get; set; }
     }
 }

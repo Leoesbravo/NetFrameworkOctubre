@@ -341,7 +341,7 @@ namespace BL
                     alumnoDL.Nombre = alumno.Nombre;
                     alumnoDL.ApellidoPaterno = alumno.ApellidoPaterno;
                     alumnoDL.ApellidoMaterno = alumno.ApellidoMaterno;
-                    alumnoDL.Genero = alumno.Sexo;
+                    //alumnoDL.Genero = alumno.Sexo;
                    // alumnoDL.IdSemestre = alumno.Semestre.IdSemestre.Value;
 
                     context.Alumnoes.Add(alumnoDL);
@@ -381,7 +381,7 @@ namespace BL
                                            alumno.IdAlumno,
                                            alumno.Nombre,
                                            alumno.IdSemestre,
-                                           alumno.Genero,
+                                           //alumno.Genero,
                                            alumno.FechaNacimiento,
                                            alumno.ApellidoPaterno,
                                            alumno.ApellidoMaterno
@@ -422,7 +422,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL_EF.IEspinozaProgramacionNCapasGenOctubreEntities1 context = new DL_EF.IEspinozaProgramacionNCapasGenOctubreEntities1())
+                using (DL_EF.LEscogidoProgramacionNCapasOctubreEntities context = new DL_EF.LEscogidoProgramacionNCapasOctubreEntities())
                 {
                     var usuarios = context.AlumnoGetAll().ToList();
                     result.Objects = new List<object>();
@@ -437,11 +437,11 @@ namespace BL
                             alumno.ApellidoPaterno = objAlumno.ApellidoPaterno;
                             alumno.ApellidoMaterno = objAlumno.ApellidoMaterno;
                             alumno.FechaNacimiento = objAlumno.FechaNacimiento.Value.ToString("dd-MM-yyyy");
-                            alumno.Sexo = objAlumno.Genero;
+                            alumno.Sexo = objAlumno.Sexo;
 
                             alumno.Semestre = new ML.Semestre();
                             alumno.Semestre.IdSemestre = objAlumno.IdSemestre.Value;
-                            alumno.Semestre.Nombre = objAlumno.SemestreNombre;                          
+                            alumno.Semestre.Nombre = objAlumno.Semestre;                          
 
                             result.Objects.Add(alumno);
 
@@ -460,6 +460,62 @@ namespace BL
             {
                 result.Correct = false;
                 result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+        public static ML.Result GetByIdEF(int idAlumno)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.LEscogidoProgramacionNCapasOctubreEntities context = new DL_EF.LEscogidoProgramacionNCapasOctubreEntities())
+                {
+                    var obj = context.AlumnoGetById(idAlumno).FirstOrDefault();
+                    result.Objects = new List<object>();
+
+                    if (obj != null)
+                    {
+                        ML.Alumno alumno = new ML.Alumno();
+                        alumno.IdAlumno = obj.IdAlumno;
+                        alumno.Nombre = obj.Nombre;
+                        alumno.ApellidoPaterno = obj.ApellidoPaterno;
+                        alumno.ApellidoMaterno = obj.ApellidoMaterno;
+                        alumno.FechaNacimiento = obj.FechaNacimiento.Value.ToString("dd-MM-yyyy");
+                        alumno.Sexo = obj.Sexo;
+
+                        alumno.Semestre = new ML.Semestre();
+                        alumno.Semestre.IdSemestre = obj.IdSemestre.Value;
+
+                        alumno.Horario = new ML.Horario();
+                        alumno.Horario.IdHorario = obj.IdHorario;
+                        alumno.Horario.Nombre = obj.HorarioNombre;
+
+                        alumno.Horario.Grupo = new ML.Grupo();
+                        alumno.Horario.Grupo.IdGrupo = obj.IdGrupo;
+                        alumno.Horario.Grupo.Nombre = obj.NombreGrupo;
+
+                        alumno.Horario.Grupo.Plantel = new ML.Plantel();
+                        alumno.Horario.Grupo.Plantel.IdPlantel = obj.IdPlantel;
+                        alumno.Horario.Grupo.Plantel.Nombre = obj.NombrePlantel;
+
+                        result.Object = alumno;
+                        result.Correct = true;
+
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se pudo realizar la consulta";
+                    }
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
             }
             return result;
         }

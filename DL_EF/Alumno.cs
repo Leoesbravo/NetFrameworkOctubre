@@ -25,11 +25,11 @@ namespace DL_EF
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
-        public string Genero { get; set; }
-        public Nullable<byte> IdSemestre { get; set; }
+        public string Sexo { get; set; }
+        public Nullable<int> IdSemestre { get; set; }
     
+        public virtual Semestre Semestre { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Horario> Horarios { get; set; }
-        public virtual Semestre Semestre { get; set; }
     }
 }

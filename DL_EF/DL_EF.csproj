@@ -51,22 +51,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alumno.cs">
-      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="AlumnoGetAll_Result.cs">
-      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="AlumnoGetById_Result.cs">
-      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="Grupo.cs">
-      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="GrupoGetByIdPlantel_Result.cs">
-      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="Horario.cs">
-      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="HorarioGetByIdGrupo_Result.cs">
       <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
@@ -105,17 +105,17 @@
       <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="Plantel.cs">
-      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="PlantelGetAll_Result.cs">
-      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Semestre.cs">
-      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
     <Compile Include="SemestreGetAll_Result.cs">
-      <DependentUpon>IEspinozaProgramacionNCapasGenOctubre.tt</DependentUpon>
+      <DependentUpon>LEscogidoProgramacionNCapasOctubre.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

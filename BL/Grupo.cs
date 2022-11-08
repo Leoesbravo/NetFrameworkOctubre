@@ -13,7 +13,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL_EF.IEspinozaProgramacionNCapasGenOctubreEntities1 context = new DL_EF.IEspinozaProgramacionNCapasGenOctubreEntities1())
+                using (DL_EF.LEscogidoProgramacionNCapasOctubreEntities context = new DL_EF.LEscogidoProgramacionNCapasOctubreEntities())
                 {
                     var usuarios = context.GrupoGetByIdPlantel(idPlantel).ToList();
                     result.Objects = new List<object>();
@@ -25,7 +25,7 @@ namespace BL
                             ML.Grupo grupo = new ML.Grupo();
                             grupo.IdGrupo = objSemestre.IdGrupo;
                             grupo.Nombre = objSemestre.Nombre;
-                        
+
                             grupo.Plantel = new ML.Plantel();
                             grupo.Plantel.IdPlantel = idPlantel;
 

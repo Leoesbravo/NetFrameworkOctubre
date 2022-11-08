@@ -15,6 +15,7 @@
         <EntityTypeShape EntityType="LEscogidoProgramacionNCapasOctubreModel.Plantel" Width="1.5" PointX="7.375" PointY="1.125" />
         <AssociationConnector Association="LEscogidoProgramacionNCapasOctubreModel.FK__Grupo__IdPlantel__38996AB5" />
         <AssociationConnector Association="LEscogidoProgramacionNCapasOctubreModel.FK__Horario__IdGrupo__3B75D760" />
+        <AssociationConnector Association="LEscogidoProgramacionNCapasOctubreModel.FK__Horario__IdAlumn__3E52440B" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

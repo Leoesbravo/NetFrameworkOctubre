@@ -13,7 +13,7 @@ namespace DL_EF
     
     public partial class SemestreGetAll_Result
     {
-        public byte IdSemestre { get; set; }
+        public int IdSemestre { get; set; }
         public string Nombre { get; set; }
     }
 }

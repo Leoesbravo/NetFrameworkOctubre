@@ -49,14 +49,19 @@ namespace PL_MVC3.Controllers
             {
 
                 //GetbyId
-                ML.Result result = BL.Alumno.GetById(idAlumno.Value);
+                ML.Result result = BL.Alumno.GetByIdEF(idAlumno.Value);
 
                 if (result.Correct)
                 {
                     alumno = (ML.Alumno)result.Object;
                     alumno.Semestre.Semestres = resultSemestre.Objects;
+                    alumno.Horario.Grupo.Plantel.Planteles = resultPlanteles.Objects;
 
-                }
+                    ML.Result resultGrupos = BL.Grupo.GetByIdPlantel(alumno.Horario.Grupo.IdGrupo);
+                    alumno.Horario.Grupo.Grupos = resultGrupos.Objects;
+
+
+                } 
                 else
                 {
                     ViewBag.Message = "Ocurrio un error al consultar el alummno seleccionado";
