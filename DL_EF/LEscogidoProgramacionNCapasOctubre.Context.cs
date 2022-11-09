@@ -133,5 +133,46 @@ namespace DL_EF
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AlumnoGetById_Result>("AlumnoGetById", idAlumnoParameter);
         }
+    
+        public virtual int AlumnoUpdate(Nullable<int> idAlumno, string nombre, string apellidoPaterno, string apellidoMaterno, string fechaNacimiento, string sexo, Nullable<int> idSemestre, string nombreHorario, Nullable<int> idGrupo)
+        {
+            var idAlumnoParameter = idAlumno.HasValue ?
+                new ObjectParameter("IdAlumno", idAlumno) :
+                new ObjectParameter("IdAlumno", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var fechaNacimientoParameter = fechaNacimiento != null ?
+                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
+                new ObjectParameter("FechaNacimiento", typeof(string));
+    
+            var sexoParameter = sexo != null ?
+                new ObjectParameter("Sexo", sexo) :
+                new ObjectParameter("Sexo", typeof(string));
+    
+            var idSemestreParameter = idSemestre.HasValue ?
+                new ObjectParameter("IdSemestre", idSemestre) :
+                new ObjectParameter("IdSemestre", typeof(int));
+    
+            var nombreHorarioParameter = nombreHorario != null ?
+                new ObjectParameter("NombreHorario", nombreHorario) :
+                new ObjectParameter("NombreHorario", typeof(string));
+    
+            var idGrupoParameter = idGrupo.HasValue ?
+                new ObjectParameter("IdGrupo", idGrupo) :
+                new ObjectParameter("IdGrupo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AlumnoUpdate", idAlumnoParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, fechaNacimientoParameter, sexoParameter, idSemestreParameter, nombreHorarioParameter, idGrupoParameter);
+        }
     }
 }

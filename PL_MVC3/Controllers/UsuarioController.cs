@@ -92,7 +92,7 @@ namespace PL_MVC3.Controllers
             }
             else
             {
-                //result = BL.Alumno.UpdateEF(alumno);
+                result = BL.Alumno.UpdateEF(alumno);
                 if (result.Correct)
                 {
                     ViewBag.Mensaje = "Se ha registrado el alumno";

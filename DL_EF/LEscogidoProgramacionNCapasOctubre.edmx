@@ -129,6 +129,17 @@
         <Function Name="AlumnoGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdAlumno" Type="int" Mode="In" />
         </Function>
+        <Function Name="AlumnoUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAlumno" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="varchar" Mode="In" />
+          <Parameter Name="Sexo" Type="char" Mode="In" />
+          <Parameter Name="IdSemestre" Type="int" Mode="In" />
+          <Parameter Name="NombreHorario" Type="varchar" Mode="In" />
+          <Parameter Name="IdGrupo" Type="int" Mode="In" />
+        </Function>
         <Function Name="GrupoGetByIdPlantel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdPlantel" Type="int" Mode="In" />
         </Function>
@@ -287,7 +298,18 @@
             <End Role="Horario" EntitySet="Horarios" />
           </AssociationSet>
           <FunctionImport Name="AlumnoGetById" ReturnType="Collection(LEscogidoProgramacionNCapasOctubreModel.AlumnoGetById_Result)">
+          <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoUpdate">
             <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="String" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+            <Parameter Name="IdSemestre" Mode="In" Type="Int32" />
+            <Parameter Name="NombreHorario" Mode="In" Type="String" />
+            <Parameter Name="IdGrupo" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SemestreGetAll_Result">
@@ -518,6 +540,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoUpdate" FunctionName="LEscogidoProgramacionNCapasOctubreModel.Store.AlumnoUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
