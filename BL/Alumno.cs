@@ -85,7 +85,7 @@ namespace BL
                     using (SqlCommand cmd = new SqlCommand())
                     {
 
-                        cmd.CommandText = "INSERT INTO Alumno (Nombre, ApellidoPaterno, ApellidoMaterno, FechaNacimiento, Sexo) VALUES (@Nombre, @ApellidoPaterno, @ApellidoMaterno, @FechaNacimiento, @Sexo)";
+                        cmd.CommandText = "AlumnoAdd";
                         cmd.Connection = context;
                         // ya tiene la sentencia y la conexión, hacen falta los parametros
 
